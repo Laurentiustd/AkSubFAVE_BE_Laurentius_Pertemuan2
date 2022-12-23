@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama');
             $table->text('alamat');
             $table->date('birthdate');
+            $table->string('foto');
             $table->timestamps();
         });
     }

@@ -35,11 +35,25 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validated = $request->validate([
+            'nim'=>'required|integer|min:99999',
+            'nama'=>'required|min:3',
+            'alamat'=>'required|min:5',
+            'birthdate'=>'required',
+            'foto'=>'required|mimes:jpg,png,jpeg'
+        ]);
+
+        $extension = $request->file('foto')->getClientOriginalExtension();
+        $filename = $request->nim.'_'.$request->image.'.'.$extension;
+        $request->file('foto')->storeAs('/public/mahasiswa', $filename);
+
         mahasiswa::create([
             'nim'=>$request->nim,
-            'nama'=>$request->name,
-            'alamat'=>$request->address,
-            'birthdate'=>$request->date
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'foto'=>$filename,  
+            'birthdate'=>$request->birthdate
         ]);
 
         return redirect('/');
@@ -66,7 +80,9 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mahasiswa = mahasiswa::findOrFail($id);
+
+        return view('editMahasiswa', compact('mahasiswa'));
     }
 
     /**
@@ -78,7 +94,19 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $extension = $request->file('foto')->getClientOriginalExtension();
+        $filename = $request->nim.'_'.$request->nim.'.'.$extension;
+        $request->file('foto')->storeAs('/public/mahasiswa', $filename);
+
+        mahasiswa::findOrFail($id)->update([
+            'nim'=>$request->nim,
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'foto'=>$filename,  
+            'birthdate'=>$request->birthdate
+        ]);
+
+        return redirect('/');
     }
 
     /**
@@ -89,6 +117,8 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        mahasiswa::destroy($id);
+
+        return redirect('/');
     }
 }

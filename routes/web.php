@@ -22,3 +22,6 @@ Route::get('/', [MahasiswaController::class, 'create']);
 Route::post('/storeStudents', [MahasiswaController::class, 'store']);
 Route::get('/showStudents', [MahasiswaController::class, 'index']);
 Route::get('/showStudents/{id}', [MahasiswaController::class, 'show']);
+Route::get('/editStudents/{id}', [MahasiswaController::class, 'edit']);
+Route::patch('/updateStudents/{id}', [MahasiswaController::class, 'update']);
+Route::delete('/deleteStudents/{id}', [MahasiswaController::class, 'destroy']);

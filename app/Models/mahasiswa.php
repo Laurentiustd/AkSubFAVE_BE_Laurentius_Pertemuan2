@@ -13,6 +13,7 @@ class mahasiswa extends Model
         'nim',
         'nama',
         'alamat',
+        'foto',
         'birthdate',
     ];
 }

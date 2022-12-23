@@ -8,6 +8,7 @@
 @foreach ($mahasiswa as $item)
     
 <div class="card m-5" style="width: 18rem;" >
+  <img src="{{asset('/storage/mahasiswa/'.$item->foto)}}" alt="pp">
     <div class="card-body">
       <h5 class="card-title">{{$item->nama}}</h5>
       <p class="card-text">{{$item->nim}}</p>
