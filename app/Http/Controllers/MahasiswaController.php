@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\mahasiswa;
+use App\Models\fakultas;
 class MahasiswaController extends Controller
 {
     /**
@@ -24,7 +25,9 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('inputMahasiswa');
+        $fakultas = fakultas::ALl();
+
+        return view('inputMahasiswa', compact('fakultas'));
     }
 
     /**
@@ -53,7 +56,8 @@ class MahasiswaController extends Controller
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'foto'=>$filename,  
-            'birthdate'=>$request->birthdate
+            'birthdate'=>$request->birthdate,
+            'fakultas_id'=>$request->fakultas
         ]);
 
         return redirect('/');

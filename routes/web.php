@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\FakultasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,5 @@ Route::get('/showStudents/{id}', [MahasiswaController::class, 'show']);
 Route::get('/editStudents/{id}', [MahasiswaController::class, 'edit']);
 Route::patch('/updateStudents/{id}', [MahasiswaController::class, 'update']);
 Route::delete('/deleteStudents/{id}', [MahasiswaController::class, 'destroy']);
+Route::get('/createFakultas', [FakultasController::class, 'create']);
+Route::post('/storeFakultas', [FakultasController::class, 'store']);

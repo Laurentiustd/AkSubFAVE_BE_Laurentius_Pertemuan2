@@ -15,5 +15,13 @@ class mahasiswa extends Model
         'alamat',
         'foto',
         'birthdate',
+        'fakultas_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(fakultasa::class);
+    }
+
+
 }

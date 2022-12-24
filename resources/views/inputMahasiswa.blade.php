@@ -40,6 +40,14 @@
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Fakultas</label>
+    <select class="form-select" aria-label="Default select example" name="fakultas">
+      @foreach ($fakultas as $i)
+          <option value="{{$i->id}}">{{$i->namaFakultas}}</option>
+      @endforeach
+    </select>
+</div>
   <button type="submit" class="btn btn-primary">Submit</button>
   <a href="/showStudents">Click here to see all students!</a>
 </form>
