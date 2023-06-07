@@ -25,7 +25,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        $fakultas = fakultas::ALl();
+        $fakultas = fakultas::All();
 
         return view('inputMahasiswa', compact('fakultas'));
     }
@@ -48,7 +48,7 @@ class MahasiswaController extends Controller
         ]);
 
         $extension = $request->file('foto')->getClientOriginalExtension();
-        $filename = $request->nim.'_'.$request->image.'.'.$extension;
+        $filename = $request->nim.'_'.$request->nama.'.'.$extension;
         $request->file('foto')->storeAs('/public/mahasiswa', $filename);
 
         mahasiswa::create([
@@ -99,7 +99,7 @@ class MahasiswaController extends Controller
     public function update(Request $request, $id)
     {
         $extension = $request->file('foto')->getClientOriginalExtension();
-        $filename = $request->nim.'_'.$request->nim.'.'.$extension;
+        $filename = $request->nim.'_'.$request->nama.'.'.$extension;
         $request->file('foto')->storeAs('/public/mahasiswa', $filename);
 
         mahasiswa::findOrFail($id)->update([
@@ -121,8 +121,11 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
+        $Mahasiswa = mahasiswa::findOrFail($id);
+        $images = '/storage/mahasiswa/'.$Mahasiswa->foto;
+        $path = str_replace('\\', '/', public_path());
+        unlink($path.$images);
         mahasiswa::destroy($id);
-
         return redirect('/');
     }
 }
